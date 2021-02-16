@@ -243,14 +243,12 @@ $(function () {
         // 清除a标签默认事件
         event.preventDefault();
         // window.location.replace("http://8.130.48.251");
-        let msg = `使用说明：
-        添加：单击 "+"
-        删除：单击 "-"
+        let msg = `使用说明
+        添加：单击 "➕"
+        删除：单击 "➖"
         切换：单击 任务
         修改：双击 任务
-数据持久化：本地浏览器缓存（非云端）
-
-博客园：https://www.cnblogs.com/xiangjianan`
+存储位置：浏览器Local Storage（非云端）`
         alert(msg);
     });
 });
