@@ -1,7 +1,7 @@
-# simpletask-v1
+# todolist-v1
 
 #### 介绍
-一个web端的ToDoList
+一个web端的todolist应用
 
 
 #### 使用说明
