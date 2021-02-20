@@ -251,4 +251,7 @@ $(function () {
 存储位置：浏览器Local Storage（非云端）`
         alert(msg);
     });
+
+    console.log(`一起聊聊开发和梦想
+这是我的微信：inMyLife2021`);
 });

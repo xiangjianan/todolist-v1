@@ -13,7 +13,7 @@ canvas {
     position: fixed;
     width: 100%;
     height: 100%;
-    background: url("../image/blue.jpg") center top;
+    background: url("../image/back.png") center top;
     background-size: 100% auto;
 }
 
@@ -27,18 +27,18 @@ canvas {
     width: 100%;
     height: 60px;
     line-height: 60px;
-    background-color: rgba(22, 22, 22, 0.7);
+    background-color: rgba(1, 1, 1, 0.5);
     z-index: 10;
 }
 
 .title > a {
-    color: #b0b0b0;
+    color: #c0c0c0;
     text-decoration: None;
     transition: 0.5s all;
 }
 
 .title > a:hover {
-    color: #ff6700;
+    color: #f37928;
     transition: 0.5s all;
 }
 
@@ -120,7 +120,7 @@ input, button {
     font-size: 30px;
     padding-left: 10px;
     border-radius: 10px;
-    /*border: 1px solid darkgray;*/
+    border: 1px solid darkgray;
     color: rgba(30, 144, 255, 1);
     display: none;
     z-index: 1;
@@ -157,13 +157,13 @@ button {
     top: 0;
     right: -80px;
     border-radius: 10px;
-    background: rgba(210, 20, 30, 0.7);
+    background: rgba(210, 20, 30, 0.8);
     transition: 0.5s all;
     display: none;
 }
 
 .todo-del:hover {
-    background: rgba(210, 20, 30, 0.93);
+    background: rgba(210, 20, 30, 1.2);
     transition: 0.5s all;
 }
 
@@ -171,7 +171,7 @@ button {
 .footer button {
     position: absolute;
     font-size: 20px;
-    background: rgba(210, 20, 30, 0.7);
+    background: rgba(210, 20, 30, 0.8);
     display: none;
 }
 
@@ -204,31 +204,33 @@ span {
     z-index: 2;
 }
 
-span:hover {
+/* span:hover { */
     /*width: 603px;*/
     /*height: 52px;*/
     /*transition: 0.5s all cubic-bezier(.46, 1, .23, 1.52);*/
     /*transition: 0.3s all;*/
-}
+/* } */
 
 /*任务类别*/
 .group {
-    color: #fff;
+    color: #888;
+    font-weight: 900;
     margin: 16px 0 16px 277px;
 }
 
 /*未完成任务*/
 #todo-list .todo-text {
-    color: #222;
+    color: #fff;
+    font-weight: 900;
     background: rgb(95, 173, 253);
     transition: 0.3s all;
 }
 
 #todo-list .todo-text:hover {
-    background: #E6A23C;
-    transform: translateY(-2px);
+    background: rgb(42, 133, 224);
+    /* transform: translateY(-1px); */
     /*transform: translateX(5px);*/
-    /*box-shadow: 0px 0px 5px #fff;*/
+    box-shadow: 0 2px 5px rgba(33, 33, 33, 0.8);
     transition: 0.3s all;
 }
 
@@ -237,16 +239,16 @@ span:hover {
     /*text-decoration: line-through;*/
     /*font-size: 20px;*/
     color: rgba(233, 233, 235, 0);
-    background: rgba(233, 233, 235, 0.2);
+    background: rgba(200, 200, 200, 0.4);
     transition: 0.4s all;
 }
 
 #done-list .done-text:hover {
     color: rgba(255, 255, 255, 0);
-    background: rgba(200, 200, 200, 0.4);
+    /* background: rgba(200, 200, 200, 0.9); */
     /*transform: translateY(-3px);*/
-    /*box-shadow: 3px 3px 10px #777;*/
-    transition: 0.4s all;
+    box-shadow: 0 2px 5px rgba(33, 33, 33, 0.3);
+    transition: 0.3s all;
 }
 
 /*修改任务*/
@@ -267,7 +269,7 @@ li input {
 }
 
 #done-list input {
-    color: rgba(111, 111, 111, 0.5);
+    color: rgba(111, 111, 111, 0.7);
 }
 
 .footer_br {
