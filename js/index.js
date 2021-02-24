@@ -67,7 +67,7 @@ $(function () {
         $('#todo-list').html(todo_html);
         $('#done-list').html(done_html);
         // 避免刷新页面导致删除按钮display属性恢复默认值none
-        if ($('#del').text() === '隐藏') {
+        if ($('#del').text() === ' ') {
             $('.todo-del').css('display', 'inline-block');
         }
         // 小标题显示与隐藏
@@ -86,8 +86,12 @@ $(function () {
     }
 
     // 输入框焦距，添加任务
+    let del_flag = true;
     let focus_flag = false;
     $('.wall').click(function () {
+        $('#del').html('&#xe614;');
+        $('.todo-del').stop().fadeOut(300);
+        del_flag = true;
         if (!focus_flag) {
             $('#add-todo').focus();
             $('#add-todo').css('background-color', '#fff');
@@ -116,10 +120,9 @@ $(function () {
     });
 
     // 显示、隐藏删除按钮
-    let del_flag = true;
     $('#del').click(function () {
         if (del_flag) {
-            $(this).html('隐藏');
+            $(this).html('&#xe614; ');
             $('.todo-del').stop().fadeIn(300);
             del_flag = false;
         } else {
@@ -202,7 +205,7 @@ $(function () {
 
         // 隐藏所有删除按钮
         if (del_flag) {
-            $('#del').html('隐藏');
+            $('#del').html('&#xe614; ');
             $('.todo-del').stop().fadeIn(300);
             del_flag = false;
         } else {
