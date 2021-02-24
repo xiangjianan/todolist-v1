@@ -3,16 +3,26 @@ $(function () {
     let todo_data = json_load();
 
     // 首次打开页面，初始化默认清单数据
-    if(todo_data.length === 0){
+    if (todo_data.length === 0) {
         todo_data = [
-            ['点击空白处，添加任务',true],
-            ['点击右侧删除按钮，管理任务',true],
-            ['单击任务可以修改文本',true],
-            ['双击任务可以切换状态',true],
-            ['存储位置：浏览器Local Storage（非云端）',true],
-            ['双击任务可以切换状态',false],
-        ]; 
+            ['点击空白处，添加任务', true],
+            ['点击右侧删除按钮，管理任务', true],
+            ['单击任务可以修改文本', true],
+            ['双击任务可以切换状态', true],
+            ['存储位置：浏览器Local Storage（非云端）', true],
+            ['双击任务可以切换状态', false],
+        ];
     }
+    let msg = `使用说明
+        添加任务：
+                方法1：点击输入框
+                方法2：左击页面空白处
+        删除任务：
+                方法1：点击删除按钮
+                方法2：右击页面空白处
+        修改任务：单击任务
+        切换状态：双击任务
+存储位置：浏览器Local Storage（非云端）`
 
     // 初始化页面
     load_todo_data();
@@ -44,7 +54,7 @@ $(function () {
                 todo_html += `
                     <li index=${i}>
                         <div>
-                            <span class="todo-text">${data[0]}</span>
+                            <span class="todo todo-text">${data[0]}</span>
                             <input type="text" name="" value="${data[0]}">
                         </div>
                         <button class="todo-del iconfont">&#xe614;</button>
@@ -55,7 +65,7 @@ $(function () {
                 done_html += `
                     <li index=${i}>
                         <div>
-                            <span class="done-text">${data[0]}</span>
+                            <span class="todo done-text">${data[0]}</span>
                             <input type="text" name="" value="${data[0]}">
                         </div>
                         <button class="todo-del iconfont">&#xe614;</button>
@@ -89,12 +99,12 @@ $(function () {
     let del_flag = false;
     let focus_flag = false;
     $('.wall').click(function () {
-        if(del_flag){
+        if (del_flag) {
             $('#del').html('&#xe614;');
             $('.todo-del').stop().fadeOut(300);
             del_flag = false;
         }
-        else{
+        else {
             if (!focus_flag) {
                 $('#add-todo').focus();
                 $('#add-todo').css('background-color', '#ffffff');
@@ -144,7 +154,7 @@ $(function () {
         return false;
     });
 
-    // 任务切换状态（代理事件）
+    // 修改任务（左键单击）
     let timer = null;
     $('ul').on('click', 'span', function () {
         clearTimeout(timer);
@@ -188,7 +198,7 @@ $(function () {
         return false;
     });
 
-    // 修改任务（代理事件）
+    // 任务切换状态（左键双击）
     $('ul').on('dblclick', 'span', function () {
         clearTimeout(timer);
         let i = $(this).parent().parent().attr('index');
@@ -197,6 +207,36 @@ $(function () {
         return false;
     });
 
+    // 右键单击显示隐藏删除按钮
+    function rightClickMouse(obj, callback) {
+        //禁止浏览器默认事件
+        $(document).delegate(obj, 'contextmenu', function (e) {
+            e.preventDefault();
+        });
+        //给选择器obj绑定右键事件
+        $(document).delegate(obj, 'mousedown', function (e) {
+            var $t = $(this);
+            if (e.which == 3) {
+                if (typeof callback == 'function') {
+                    //右键执行回调函数
+                    callback($t);
+                }
+            }
+        });
+    }
+    rightClickMouse('body', function (t) {
+        if (!del_flag) {
+            $(this).html('&#xe614; ');
+            $('.todo-del').stop().fadeIn(300);
+            del_flag = true;
+        } else {
+            $(this).html('&#xe614;');
+            $('.todo-del').stop().fadeOut(300);
+            del_flag = false;
+        }
+        return false;
+    });
+    
     // 清除所有已完成任务
     $('.footer #del_done').click(function () {
         let new_list = [];
@@ -227,12 +267,6 @@ $(function () {
         // 清除a标签默认事件
         event.preventDefault();
         // window.location.replace("http://8.130.48.251");
-        let msg = `使用说明
-        添加任务：点击输入框，或屏幕任意位置
-        删除任务：点击删除按钮
-        修改任务：单击任务
-        切换状态：双击任务
-存储位置：浏览器Local Storage（非云端）`
         alert(msg);
         return false;
     });
