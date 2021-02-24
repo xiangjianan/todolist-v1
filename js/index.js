@@ -86,20 +86,24 @@ $(function () {
     }
 
     // 输入框焦距，添加任务
-    let del_flag = true;
+    let del_flag = false;
     let focus_flag = false;
     $('.wall').click(function () {
-        $('#del').html('&#xe614;');
-        $('.todo-del').stop().fadeOut(300);
-        del_flag = true;
-        if (!focus_flag) {
-            $('#add-todo').focus();
-            $('#add-todo').css('background-color', '#fff');
-            focus_flag = true;
-        } else {
-            $('#add-todo').blur();
-            $('#add-todo').css('background-color', 'rgba(33,33,33,0.02)');
-            focus_flag = false;
+        if(del_flag){
+            $('#del').html('&#xe614;');
+            $('.todo-del').stop().fadeOut(300);
+            del_flag = false;
+        }
+        else{
+            if (!focus_flag) {
+                $('#add-todo').focus();
+                $('#add-todo').css('background-color', '#fff');
+                focus_flag = true;
+            } else {
+                $('#add-todo').blur();
+                $('#add-todo').css('background-color', 'rgba(33,33,33,0.02)');
+                focus_flag = false;
+            }
         }
     });
     $('#add-todo').click(function () {
@@ -121,14 +125,14 @@ $(function () {
 
     // 显示、隐藏删除按钮
     $('#del').click(function () {
-        if (del_flag) {
+        if (!del_flag) {
             $(this).html('&#xe614; ');
             $('.todo-del').stop().fadeIn(300);
-            del_flag = false;
+            del_flag = true;
         } else {
             $(this).html('&#xe614;');
             $('.todo-del').stop().fadeOut(300);
-            del_flag = true;
+            del_flag = false;
         }
         return false;
     });
@@ -204,14 +208,14 @@ $(function () {
         todo_data = new_list;
 
         // 隐藏所有删除按钮
-        if (del_flag) {
+        if (!del_flag) {
             $('#del').html('&#xe614; ');
             $('.todo-del').stop().fadeIn(300);
-            del_flag = false;
+            del_flag = true;
         } else {
             $('#del').html('&#xe614;');
             $('.todo-del').stop().fadeOut(300);
-            del_flag = true;
+            del_flag = false;
         }
 
         load_todo_data();
