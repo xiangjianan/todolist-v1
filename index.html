@@ -4,38 +4,41 @@
 <head>
     <meta charset="UTF-8">
     <title>ToDoList</title>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="./css/index.css">
     <link rel="stylesheet" type="text/css" href="./css/fonts.css">
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="./js/time.js"></script>
     <script type="text/javascript" src="./js/index.js"></script>
-    <!-- <script type="text/javascript" src="./js/background.js"></script> -->
 </head>
 
-<body class="wall" id="body">
-    <canvas></canvas>
-    <div class="title">
-        <a class="title-a" id="datetime" href="#"></a>
-    </div>
-    <div class="container_big">
-        <div class="header">
-            <div class="container">
-                <label id="add" for="add-todo" class="iconfont">&#xe63b;</label>
-                <input type="text" name="" id="add-todo">
-                <button id="del" class="iconfont">&#xe643;</button>
+<body class="wall">
+    <div class="container">
+        <div class="title row">
+            <div class="float-left col-md-1">
+                <a class="iconfont" href="http://xiangjianan.gitee.io/site">&#xe600;</a>
+            </div>
+            <div class="float-left col-md-9">
+                <input type="text" name="" id="add-todo" placeholder="输入任务或想法，按下回车保存">
+            </div>
+            <div class="float-right col-md-1">
+                <a class="iconfont" id="readme" href="javascript:0">&#xe6ca;</a>
+            </div>
+            <div class="float-right col-md-1">
+                <a class="iconfont" id="del" href="javascript:0">&#xe614;</a>
             </div>
         </div>
-        <div class="body">
-            <div class="container">
+        <div class="row">
+            <div class="col-md-10 offset-1">
+                <br>
                 <p class="group todo-flag">待执行</p>
                 <ul id="todo-list"></ul>
                 <p class="group done-flag">已完成</p>
                 <ul id="done-list"></ul>
             </div>
         </div>
-        <div class="footer">
-            <div class="container">
+        <div class="footer row">
+            <div class="col-md-10 offset-1">
                 <button id="del_done" class="todo-del">清除所有已完成任务</button>
             </div>
         </div>

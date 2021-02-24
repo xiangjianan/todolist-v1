@@ -1,44 +1,30 @@
 {
-  "id": "",
-  "name": "",
+  "id": "2386128",
+  "name": "todolist",
   "font_family": "iconfont",
   "css_prefix_text": "icon-",
   "description": "",
   "glyphs": [
     {
-      "icon_id": "64165991",
-      "name": "加",
-      "font_class": "jia",
-      "unicode": "e601",
-      "unicode_decimal": 58881
+      "icon_id": "4950560",
+      "name": "首页-选中",
+      "font_class": "index",
+      "unicode": "e600",
+      "unicode_decimal": 58880
     },
     {
-      "icon_id": "64165992",
-      "name": "减",
-      "font_class": "jian",
-      "unicode": "e643",
-      "unicode_decimal": 58947
-    },
-    {
-      "icon_id": "64165993",
-      "name": "添加",
-      "font_class": "tianjia",
-      "unicode": "e63b",
-      "unicode_decimal": 58939
-    },
-    {
-      "icon_id": "64165994",
-      "name": "减少",
-      "font_class": "jianshao",
-      "unicode": "e645",
-      "unicode_decimal": 58949
-    },
-    {
-      "icon_id": "64165995",
+      "icon_id": "10292039",
       "name": "删 除",
       "font_class": "shanchu",
-      "unicode": "e617",
-      "unicode_decimal": 58903
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "18921517",
+      "name": "说明书",
+      "font_class": "shuoming",
+      "unicode": "e6ca",
+      "unicode_decimal": 59082
     }
   ]
 }
