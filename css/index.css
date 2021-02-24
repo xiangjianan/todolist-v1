@@ -4,9 +4,7 @@ body {
     margin: 0;
     width: 100%;
     height: 100vh;
-    background-color: rgba(255, 255, 255, 0.9);
-    background-image: radial-gradient(circle at top right, rgba(121, 68, 154, 0.13), transparent),
-    radial-gradient(circle at 20% 80%, rgba(41, 196, 255, 0.13), transparent);
+    background-color: rgba(33, 33, 33, 0.07);
 }
 
 /*标题属性*/
@@ -15,6 +13,7 @@ body {
     top: 0;
     text-align: center;
     font-size: 16px;
+    margin: auto;
     height: 60px;
     line-height: 60px;
     background-color: rgba(255, 255, 255, 0.5);
@@ -155,7 +154,7 @@ li span {
 /*未完成任务*/
 #todo-list .todo-text {
     color: #fff;
-    font-weight: 900;
+    font-weight: 500;
     background: #409EFF;
     transition: all .3s ease-in-out;
 }
