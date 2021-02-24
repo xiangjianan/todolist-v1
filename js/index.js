@@ -97,11 +97,11 @@ $(function () {
         else{
             if (!focus_flag) {
                 $('#add-todo').focus();
-                $('#add-todo').css('background-color', '#fff');
+                $('#add-todo').css('background-color', '#ffffff');
                 focus_flag = true;
             } else {
                 $('#add-todo').blur();
-                $('#add-todo').css('background-color', 'rgba(33,33,33,0.02)');
+                $('#add-todo').css('background-color', '#ECECED');
                 focus_flag = false;
             }
         }
