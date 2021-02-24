@@ -59,6 +59,7 @@ input, button {
 #add-todo {
     height: 43px;
     width: 100%;
+    line-height: 43px;
     font-size: 16px;
     padding-left: 20px;
     margin: 10px 0;
