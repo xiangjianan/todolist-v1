@@ -271,6 +271,10 @@ $(function () {
         return false;
     });
 
-    console.log(`一起聊聊开发和梦想
-这是我的微信：inMyLife2021`);
+    console.log(`
+博客园：https://www.cnblogs.com/xiangjianan/
+
+微信：inMyLife2021
+
+`);
 });
