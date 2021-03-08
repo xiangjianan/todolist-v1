@@ -1,46 +1,28 @@
 $(function () {
-    let day_list = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
-
-    // 获取时间
-    function time_now() {
-        let now = new Date();
-        let month = now.getMonth() + 1;
-        let date = now.getDate();
-        let day = now.getDay();
-        let hour = now.getHours();
-        let minute = now.getMinutes();
-        let time0 = month + '月' + date + '日 ' + day_list[day];
-        let time1 = '';
-        time1 += hour >= 12 ? '下午 ' : '上午 ';
-        if (hour === 0) {
-            time1 += '12';
-        } else {
-            time1 += (hour > 12 ? hour - 12 : hour);
-        }
-        time1 += (minute < 10 ? ':0' : ':') + minute;
-        $('#datetime').html(time0 + ' ' + time1);
-    }
-
-    // 每1秒钟更新1次时间
-    time_now();
-    setInterval(time_now, 1000);
-});
-$(function () {
     // 获取任务清单数据
     let todo_data = json_load();
 
     // 首次打开页面，初始化默认清单数据
-    // if(todo_data.length === 0){
-    //     todo_data = [
-    //         ['今日工作任务 V1.0.3（PC版）',true],
-    //         ['点击任务，标记为已完成',true],
-    //         ['点击“+”，添加任务',true],
-    //         ['点击“-”，删除任务',true],
-    //         ['双击任务，以进行修改',true],
-    //         ['数据持久化存储位置：本地浏览器缓存（非网络）',true],
-    //         ['点击任务，切换任务状态',false],
-    //     ]; 
-    // }
+    if (todo_data.length === 0) {
+        todo_data = [
+            ['点击空白处，添加任务', true],
+            ['点击右侧删除按钮，管理任务', true],
+            ['单击任务可以修改文本', true],
+            ['双击任务可以切换状态', true],
+            ['存储位置：浏览器Local Storage（非云端）', true],
+            ['双击任务可以切换状态', false],
+        ];
+    }
+    let msg = `使用说明
+        添加任务：
+                方法1：点击输入框
+                方法2：左击页面空白处
+        删除任务：
+                方法1：点击删除按钮
+                方法2：右击页面空白处
+        修改任务：单击任务
+        切换状态：双击任务
+存储位置：浏览器Local Storage（非云端）`
 
     // 初始化页面
     load_todo_data();
@@ -57,9 +39,7 @@ $(function () {
 
     // 上传数据到本地浏览器
     function json_save() {
-        // console.log(todo_data);
         let content = JSON.stringify(todo_data);
-        // console.log(content);
         localStorage.setItem('todo-list', content);
     }
 
@@ -74,10 +54,10 @@ $(function () {
                 todo_html += `
                     <li index=${i}>
                         <div>
-                            <span class="todo-text">${data[0]}</span>
+                            <span class="todo todo-text">${data[0]}</span>
                             <input type="text" name="" value="${data[0]}">
                         </div>
-                        <button class="todo-del iconfont">&#xe617;</button>
+                        <button class="todo-del iconfont">&#xe614;</button>
                     </li>
                 `
                 todo_flag = true;
@@ -85,10 +65,10 @@ $(function () {
                 done_html += `
                     <li index=${i}>
                         <div>
-                            <span class="done-text">${data[0]}</span>
+                            <span class="todo done-text">${data[0]}</span>
                             <input type="text" name="" value="${data[0]}">
                         </div>
-                        <button class="todo-del iconfont">&#xe617;</button>
+                        <button class="todo-del iconfont">&#xe614;</button>
                     </li>
                 `
                 done_flag = true;
@@ -97,7 +77,7 @@ $(function () {
         $('#todo-list').html(todo_html);
         $('#done-list').html(done_html);
         // 避免刷新页面导致删除按钮display属性恢复默认值none
-        if ($('#del').text() === ' ') {
+        if ($('#del').text() === ' ') {
             $('.todo-del').css('display', 'inline-block');
         }
         // 小标题显示与隐藏
@@ -115,14 +95,32 @@ $(function () {
         json_save();
     }
 
-    // 添加任务
-    // 点击“+”，显示输入框
-    $('#add').click(function () {
-        $('#add-todo').stop().slideDown(100);
+    // 输入框焦距，添加任务
+    let del_flag = false;
+    let focus_flag = false;
+    $('.wall').click(function () {
+        if (del_flag) {
+            $('#del').html('&#xe614;');
+            $('.todo-del').stop().fadeOut(300);
+            del_flag = false;
+        }
+        else {
+            if (!focus_flag) {
+                $('#add-todo').focus();
+                $('#add-todo').css('background-color', '#ffffff');
+                focus_flag = true;
+            } else {
+                $('#add-todo').blur();
+                $('#add-todo').css('background-color', '#ECECED');
+                focus_flag = false;
+            }
+        }
     });
-    // 失去焦点，隐藏输入框
-    $('#add-todo').blur(function () {
-        $('#add-todo').stop().slideUp(100);
+    $('#add-todo').click(function () {
+        $('#add-todo').focus();
+        $('#add-todo').css('background-color', '#fff');
+        focus_flag = true;
+        return false;
     });
     // 回车，添加新任务
     $('#add-todo').keydown(function (event) {
@@ -136,30 +134,27 @@ $(function () {
     });
 
     // 显示、隐藏删除按钮
-    let del_flag = true;
     $('#del').click(function () {
-        if (del_flag) {
-            $(this).css('width', '140px');
-            $(this).html(' &#xe643;');
-            // console.log($('#del').text());
+        if (!del_flag) {
+            $(this).html('&#xe614; ');
             $('.todo-del').stop().fadeIn(300);
-            del_flag = false;
-        } else {
-            $(this).css('width', '50px');
-            $(this).html('&#xe643;');
-            $('.todo-del').stop().fadeOut(300);
             del_flag = true;
+        } else {
+            $(this).html('&#xe614;');
+            $('.todo-del').stop().fadeOut(300);
+            del_flag = false;
         }
+        return false;
     });
 
     // 删除任务（代理事件）
     $('ul').on('click', '.todo-del', function () {
         todo_data.splice($(this).parent().attr('index'), 1);
-        // console.log(todo_data);
         load_todo_data();
+        return false;
     });
 
-    // 任务切换状态（代理事件）
+    // 修改任务（左键单击）
     let timer = null;
     $('ul').on('click', 'span', function () {
         clearTimeout(timer);
@@ -167,50 +162,81 @@ $(function () {
         // 区分单、双击
         timer = setTimeout(function () {
             let i = current.parent().parent().attr('index');
-            todo_data[i][1] = !todo_data[i][1];
-            load_todo_data();
-        }, 250);
-    });
-
-    // 修改任务（代理事件）
-    $('ul').on('dblclick', 'span', function () {
-        clearTimeout(timer);
-        let i = $(this).parent().parent().attr('index');
-        // 设置z-index，输入框覆盖任务标签
-        $(this).siblings().css({
-            'z-index': 3,
-            'background': '#f9f9f9',
-            'border': '1px solid darkgray',
-        });
-        // 选中文本，得到焦点
-        $(this).siblings().select();
-        // 回车，修改内容成功
-        $(this).siblings().keydown(function (event) {
-            if (event.keyCode === 13) {
+            // 设置z-index，输入框覆盖任务标签
+            current.siblings().css({
+                'z-index': 3,
+                'background': '#f9f9f9',
+            });
+            // 选中文本，得到焦点
+            current.siblings().select();
+            // 回车，修改内容成功
+            current.siblings().keydown(function (event) {
+                if (event.keyCode === 13) {
+                    todo_data[i][0] = $(this).val();
+                    // 内容为空，直接删除
+                    if (!$(this).val()) {
+                        todo_data.splice(i, 1);
+                    }
+                    load_todo_data();
+                }
+            });
+            // 失去焦点，修改内容成功
+            current.siblings().blur(function () {
+                $(this).css({
+                    'z-index': 1,
+                    'background': '#fff',
+                    'border': 'none',
+                });
                 todo_data[i][0] = $(this).val();
-                // 内容为空，直接删除
+                // 内容为空时，直接删除
                 if (!$(this).val()) {
                     todo_data.splice(i, 1);
                 }
                 load_todo_data();
-            }
-        });
-        // 失去焦点，修改内容成功
-        $(this).siblings().blur(function () {
-            $(this).css({
-                'z-index': 1,
-                'background': '#fff',
-                'border': 'none',
             });
-            todo_data[i][0] = $(this).val();
-            // 内容为空时，直接删除
-            if (!$(this).val()) {
-                todo_data.splice(i, 1);
-            }
-            load_todo_data();
-        });
+        }, 250);
+        return false;
     });
 
+    // 任务切换状态（左键双击）
+    $('ul').on('dblclick', 'span', function () {
+        clearTimeout(timer);
+        let i = $(this).parent().parent().attr('index');
+        todo_data[i][1] = !todo_data[i][1];
+        load_todo_data();
+        return false;
+    });
+
+    // 右键单击显示隐藏删除按钮
+    function rightClickMouse(obj, callback) {
+        //禁止浏览器默认事件
+        $(document).delegate(obj, 'contextmenu', function (e) {
+            e.preventDefault();
+        });
+        //给选择器obj绑定右键事件
+        $(document).delegate(obj, 'mousedown', function (e) {
+            var $t = $(this);
+            if (e.which == 3) {
+                if (typeof callback == 'function') {
+                    //右键执行回调函数
+                    callback($t);
+                }
+            }
+        });
+    }
+    rightClickMouse('body', function (t) {
+        if (!del_flag) {
+            $(this).html('&#xe614; ');
+            $('.todo-del').stop().fadeIn(300);
+            del_flag = true;
+        } else {
+            $(this).html('&#xe614;');
+            $('.todo-del').stop().fadeOut(300);
+            del_flag = false;
+        }
+        return false;
+    });
+    
     // 清除所有已完成任务
     $('.footer #del_done').click(function () {
         let new_list = [];
@@ -222,36 +248,35 @@ $(function () {
         todo_data = new_list;
 
         // 隐藏所有删除按钮
-        if (del_flag) {
-            $('#del').css('width', '140px');
-            $('#del').html(' &#xe643;');
-            // console.log($('#del').text());
+        if (!del_flag) {
+            $('#del').html('&#xe614; ');
             $('.todo-del').stop().fadeIn(300);
-            del_flag = false;
-        } else {
-            $('#del').css('width', '50px');
-            $('#del').html('&#xe643;');
-            $('.todo-del').stop().fadeOut(300);
             del_flag = true;
+        } else {
+            $('#del').html('&#xe614;');
+            $('.todo-del').stop().fadeOut(300);
+            del_flag = false;
         }
 
         load_todo_data();
+        return false;
     });
 
     // One Step
-    $('.title').on('click', '#datetime', function () {
+    $('.title').on('click', '#readme', function () {
         // 清除a标签默认事件
         event.preventDefault();
         // window.location.replace("http://8.130.48.251");
-        let msg = `使用说明
-        添加：单击 "➕"
-        删除：单击 "➖"
-        切换：单击 任务
-        修改：双击 任务
-存储位置：浏览器Local Storage（非云端）`
         alert(msg);
+        return false;
     });
 
-    console.log(`一起聊聊开发和梦想
-这是我的微信：inMyLife2021`);
+    console.log(`
+Email :\tXJN9872@163.com
+
+WeChat:\tinMyLife2021
+
+Page  :\twww.helloxjn.com
+
+`);
 });
