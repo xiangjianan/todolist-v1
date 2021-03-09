@@ -272,11 +272,11 @@ $(function () {
     });
 
     console.log(`
-Email :\tXJN9872@163.com
+GitHub: https://github.com/xiangjianan
 
-WeChat:\tinMyLife2021
+Email: xiang9872@gmail.com
 
-Page  :\twww.helloxjn.com
+Page: www.helloxjn.com
 
 `);
 });
