@@ -4,7 +4,7 @@ body {
     margin: 0;
     width: 100%;
     height: 100vh;
-    background-color: #ECECED;
+    background-color: #E4EBF5;
 }
 
 /*标题属性*/
@@ -16,7 +16,7 @@ body {
     margin: auto;
     height: 60px;
     line-height: 60px;
-    background-color: #ddd;
+    background-color: #d5dce6;
     z-index: 10;
 }
 
@@ -167,7 +167,7 @@ li span {
     /*text-decoration: line-through;*/
     /*font-size: 20px;*/
     color: rgba(233, 233, 235, 0);
-    background: rgba(200, 200, 200, 0.2);
+    background: rgba(200, 200, 200, 0.22);
     transition: all .3s ease-in-out;
 }
 
