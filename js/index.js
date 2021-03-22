@@ -111,7 +111,7 @@ $(function () {
                 focus_flag = true;
             } else {
                 $('#add-todo').blur();
-                $('#add-todo').css('background-color', '#ECECED');
+                $('#add-todo').css('background-color', '#E4EBF5');
                 focus_flag = false;
             }
         }
