@@ -107,11 +107,11 @@ $(function () {
         else {
             if (!focus_flag) {
                 $('#add-todo').focus();
-                $('#add-todo').css('background-color', '#ffffff');
+                $('#add-todo').css('background-color', 'rgba(255,255,255,0.8)');
                 focus_flag = true;
             } else {
                 $('#add-todo').blur();
-                $('#add-todo').css('background-color', '#E4EBF5');
+                $('#add-todo').css('background-color', 'rgba(255,255,255,0.3)');
                 focus_flag = false;
             }
         }
